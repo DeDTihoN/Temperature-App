@@ -61,3 +61,5 @@ C:\Users\pc\source\repos\CityTemperature\bin\Debug\CityTemperature.exe.manifest
 C:\Users\pc\source\repos\CityTemperature\bin\Debug\CityTemperature.application
 C:\Users\pc\source\repos\CityTemperature\obj\Debug\CityTemperature.exe.manifest
 C:\Users\pc\source\repos\CityTemperature\obj\Debug\CityTemperature.application
+C:\Users\pc\source\repos\CityTemperature\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\pc\source\repos\CityTemperature\bin\Debug\System.Configuration.ConfigurationManager.xml

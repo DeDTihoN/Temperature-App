@@ -24,19 +24,14 @@ namespace CityTemperature
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
+        // Инициализация компонентов формы 
         private void InitializeComponent()
         {
             this.CityNameBox = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.ResultButton = new MaterialSkin.Controls.MaterialRaisedButton();
             this.ResultLabel = new MaterialSkin.Controls.MaterialLabel();
             this.SuspendLayout();
-            // 
-            // CityNameBox
-            // 
+
             this.CityNameBox.Depth = 0;
             this.CityNameBox.Hint = "";
             this.CityNameBox.Location = new System.Drawing.Point(107, 79);
@@ -50,12 +45,11 @@ namespace CityTemperature
             this.CityNameBox.TabIndex = 0;
             this.CityNameBox.Text = "Введите город";
             this.CityNameBox.UseSystemPasswordChar = false;
+            // Добавление обработчиков событий для CityNameBox 
             this.CityNameBox.Click += new System.EventHandler(this.CityNameBox_Click);
-            this.CityNameBox.Enter += new System.EventHandler(this.CityNameBox_Enter);
-            this.CityNameBox.Leave += new System.EventHandler(this.CityNameBox_Leave);
-            // 
-            // ResultButton
-            // 
+            
+
+            // Настройка ResultButton и добавления обработчика события 
             this.ResultButton.Depth = 0;
             this.ResultButton.Location = new System.Drawing.Point(132, 127);
             this.ResultButton.MouseState = MaterialSkin.MouseState.HOVER;
@@ -66,9 +60,9 @@ namespace CityTemperature
             this.ResultButton.Text = "получить текущую температуру";
             this.ResultButton.UseVisualStyleBackColor = true;
             this.ResultButton.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // ResultLabel
-            // 
+            
+
+            // Настройка ResultLabel 
             this.ResultLabel.AutoSize = true;
             this.ResultLabel.Depth = 0;
             this.ResultLabel.Font = new System.Drawing.Font("Roboto", 11F);
@@ -78,19 +72,16 @@ namespace CityTemperature
             this.ResultLabel.Name = "ResultLabel";
             this.ResultLabel.Size = new System.Drawing.Size(0, 19);
             this.ResultLabel.TabIndex = 2;
-            this.ResultLabel.Click += new System.EventHandler(this.ResultLabel_Click);
-            // 
-            // Form1
-            // 
+            
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(434, 272);
+            // Добавление компонентов на форму 
             this.Controls.Add(this.ResultLabel);
             this.Controls.Add(this.ResultButton);
             this.Controls.Add(this.CityNameBox);
             this.Name = "Form1";
             this.Text = "Температура города";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

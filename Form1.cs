@@ -13,17 +13,23 @@ using Google.Cloud.Translation.V2;
 using Newtonsoft.Json.Linq;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using System.Configuration;
 
 namespace CityTemperature
 {
     public partial class Form1 : MaterialForm
     {
-        private const string GoogleTranslateApiKey = "AIzaSyAqbcpU-ZU0K_krumb6wlijpKzud3Jpej4";
-        private const string OpenWeatherMapApiKey = "76b6a91eaa1f27a40f0bff71376e1b55";
+        private readonly string GoogleTranslateApiKey;
+        private readonly string OpenWeatherMapApiKey;
         public Form1()
         {
             InitializeComponent();
 
+            // получение ключей API из файла App.config
+            GoogleTranslateApiKey = ConfigurationManager.AppSettings["GoogleTranslateApiKey"];
+            OpenWeatherMapApiKey = ConfigurationManager.AppSettings["OpenWeatherMapApiKey"];
+
+            // настройка MaterialSkinManager для улучшения внешнего вида приложения 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -34,6 +40,8 @@ namespace CityTemperature
         // функция перевода города на английский язык с помощью Google Translate API 
         private string TranslateCityToEnglish(string russianCity)
         {
+            // если не введено название города, то возвращается null
+            if (russianCity==null)return null;
             TranslationClient client = TranslationClient.CreateFromApiKey(GoogleTranslateApiKey);
 
             var response = client.TranslateText(russianCity, "en", "ru");
@@ -41,9 +49,10 @@ namespace CityTemperature
         }
 
 
-        // функция получения температуры в городе с помощью OpenWeatherMap API 
+        // функция получения температуры в городе с помощью OpenWeatherMap API после нажатия на кнопку получения результата 
         private void button1_Click(object sender, EventArgs e)
         {
+            // название города, введенное пользователем на русском языке
             string russianCity = CityNameBox.Text;
             string englishCity = TranslateCityToEnglish(russianCity);
             try
@@ -58,8 +67,9 @@ namespace CityTemperature
                     string json = client.DownloadString(apiUrl);
                     // парсинг данных с помощью библиотеки Newtonsoft.Json 
                     JObject data = JObject.Parse(json);
-                    if (data["main"] != null && data["main"]["temp"] != null)
-                    {
+                    if (data["main"] != null && data["main"]["temp"] != null) { 
+                    
+                        // конвертация результатов в тип double с точностью до 2 знаков после запятой
                         double temperature = Convert.ToDouble(data["main"]["temp"]);
                         ResultLabel.Text = $"Текущая температура в городе {russianCity}: {temperature} C°";
                     }
@@ -69,30 +79,14 @@ namespace CityTemperature
                     }
                 }
             }
+            // обработка исключений для случая, если введено неправильное название города 
             catch (Exception ex)
             {
                 ResultLabel.Text = "Не удалось получить данные\n\t\t\t( возможно введено неправильное название города)";
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ResultLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CityNameBox_Enter(object sender, EventArgs e)
-        {
-        }
-
-        private void CityNameBox_Leave(object sender, EventArgs e)
-        {
-        }
-
+        // очистка поля ввода при нажатии на него
         private void CityNameBox_Click(object sender, EventArgs e)
         {
             if (CityNameBox.Text == "Введите город")
