@@ -21,6 +21,7 @@ namespace CityTemperature
     {
         private readonly string GoogleTranslateApiKey;
         private readonly string OpenWeatherMapApiKey;
+        // конструктор формы 
         public Form1()
         {
             InitializeComponent();
